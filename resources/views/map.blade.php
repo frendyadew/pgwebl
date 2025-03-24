@@ -452,5 +452,73 @@
                 });
             });
         });
+
+        // geojsonn points
+        var point = L.geoJson(null, {
+            onEachFeature: function(feature, layer) {
+                var popupContent = "Nama titik: " + feature.properties.name + "<br>" +
+                    "Deskripsi: " + feature.properties.description;
+                layer.on({
+                    click: function(e) {
+                        point.bindPopup(popupContent);
+                    },
+                    mouseover: function(e) {
+                        point.bindTooltip(feature.properties.name);
+                    },
+                });
+            },
+        });
+        $.getJSON("{{ route('api.points') }}", function(data) {
+            point.addData(data);
+            map.addLayer(point);
+        });
+
+        // GeoJSON polylines
+        var polyline = L.geoJson(null, {
+            style: function(feature) {
+                return {
+                    color: "#3388ff",
+                    weight: 4,
+                    opacity: 0.7
+                };
+            },
+            onEachFeature: function(feature, layer) {
+                var popupContent = "Nama polyline: " + feature.properties.name + "<br>" +
+                    "Deskripsi: " + feature.properties.description + "<br>" +
+                    "Panjang: " + feature.properties.length_km ? feature.properties.length_km + " km" : "tidak diketahui" + "<br>" +
+
+                layer.bindPopup(popupContent);
+                layer.bindTooltip(feature.properties.name);
+            },
+        });
+        $.getJSON("{{ route('api.polylines') }}", function(data) {
+            polyline.addData(data);
+            map.addLayer(polyline);
+        });
+
+        // GeoJSON polygons
+        var polygon = L.geoJson(null, {
+            style: function(feature) {
+                return {
+                    color: "#ff7800",
+                    weight: 2,
+                    opacity: 0.65,
+                    fillOpacity: 0.4
+                };
+            },
+            onEachFeature: function(feature, layer) {
+                console.log(feature);
+                var popupContent = "Nama polygon: " + feature.properties.name + "<br>" +
+                    "Deskripsi: " + feature.properties.description + "<br>" +
+                    "Luas: " + (feature.properties.area_km2 ? feature.properties.area_km2 + " km" : "tidak diketahui");
+
+                layer.bindPopup(popupContent);
+                layer.bindTooltip(feature.properties.name);
+            },
+        });
+        $.getJSON("{{ route('api.polygons') }}", function(data) {
+            polygon.addData(data);
+            map.addLayer(polygon);
+        });
     </script>
 @endsection
