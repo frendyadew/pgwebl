@@ -231,15 +231,27 @@
                 var routedelete = "{{ route('points.destroy', ':id') }}";
                 routedelete = routedelete.replace(':id', feature.properties.id);
 
+                var routeedit = "{{ route('points.edit', ':id') }}";
+                routeedit = routeedit.replace(':id', feature.properties.id);
+
                 var popupContent =
                     "Nama: " + feature.properties.name + "<br>" +
                     "Deskripsi: " + feature.properties.description + "<br>" +
+                    "<div class='row mt-2 text-center'>" +
                     "<img src='{{ asset('storage/images') }}/" + feature.properties.image +
-                    "' width='200' alt=''>" + "<br>" +
-                    "<form method='POST' action='" + routedelete + "'>" +
-                    '@csrf' + '@method("DELETE")' +
-                    '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\')"><i class="fa-solid fa-trash-can"></i></button>' +
-                    "</form>";
+                    "' width='200' alt='' class='mx-auto'>" + "<br>" +
+                    "</div>" +
+                    "<div class='row mt-2 justify-content-center'>" +
+                    "<div class='col-3 text-center'>" +
+                        "<a href='" + routeedit + "' class='btn btn-warning btn-sm'><i class='fa-solid fa-pen-to-square'></i></a>" +
+                    "</div>" +
+                    "<div class='col-3 text-center'>" +
+                        "<form method='POST' action='" + routedelete + "'>" +
+                        '@csrf' + '@method('DELETE')' +
+                        '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\')"><i class="fa-solid fa-trash-can"></i></button>' +
+                        "</form>" +
+                    "</div>" +
+                    "</div>";
 
 
                 layer.on({
@@ -270,7 +282,7 @@
                     "<img src='{{ asset('storage/images') }}/" + feature.properties.image +
                     "' width='200' alt=''>" + "<br>" +
                     "<form method='POST' action='" + routedelete + "'>" +
-                    '@csrf' + '@method("DELETE")' +
+                    '@csrf' + '@method('DELETE')' +
                     '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\')"><i class="fa-solid fa-trash-can"></i></button>' +
                     "</form>";
 
@@ -303,7 +315,7 @@
                     "<img src='{{ asset('storage/images') }}/" + feature.properties.image +
                     "' width='200' alt=''>" + "<br>" +
                     "<form method='POST' action='" + routedelete + "'>" +
-                    '@csrf' + '@method("DELETE")' +
+                    '@csrf' + '@method('DELETE')' +
                     '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\')"><i class="fa-solid fa-trash-can"></i></button>' +
                     "</form>";
                 layer.on({

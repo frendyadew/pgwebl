@@ -15,7 +15,7 @@
                 </li>
                 <li class="nav-item">
                      {{-- Contoh sederhana: jika route saat ini adalah 'map', tambahkan 'active' --}}
-                    <a class="nav-link {{ Route::currentRouteName() == 'map' ? 'active' : '' }}" href="{{ route('map') }}">Map</a>
+                    <a class="nav-link" href="{{ route('map') }}">Map</a>
                 </li>
                 <li class="nav-item">
                      {{-- Contoh sederhana: jika route saat ini adalah 'table', tambahkan 'active' --}}
