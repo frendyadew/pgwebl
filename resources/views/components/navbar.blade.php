@@ -18,8 +18,24 @@
                     <a class="nav-link" href="{{ route('map') }}">Map</a>
                 </li>
                 <li class="nav-item">
-                     {{-- Contoh sederhana: jika route saat ini adalah 'table', tambahkan 'active' --}}
+                    {{-- Contoh sederhana: jika route saat ini adalah 'table', tambahkan 'active' --}}
                     <a class="nav-link {{ Route::currentRouteName() == 'table' ? 'active' : '' }}" href="{{ route('table') }}">Table</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle {{ in_array(Route::currentRouteName(), ['api.points', 'api.polylines', 'api.polygons']) ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                       Data
+                    </a>
+                    <ul class="dropdown-menu">
+                       <li>
+                          <a class="dropdown-item {{ Route::currentRouteName() == 'api.points' ? 'active' : '' }}" href="{{ route('api.points') }}">Points</a>
+                       </li>
+                       <li>
+                          <a class="dropdown-item {{ Route::currentRouteName() == 'api.polylines' ? 'active' : '' }}" href="{{ route('api.polylines') }}">Polylines</a>
+                       </li>
+                       <li>
+                          <a class="dropdown-item {{ Route::currentRouteName() == 'api.polygons' ? 'active' : '' }}" href="{{ route('api.polygons') }}">Polygons</a>
+                       </li>
+                    </ul>
                 </li>
                 {{-- HAPUS Dropdown --}}
                 {{-- HAPUS Link Disabled --}}

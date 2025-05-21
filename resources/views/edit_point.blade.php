@@ -17,18 +17,18 @@
 @section('content')
     <div id="map"></div>
 
-    <!-- Modal Edit Point-->
-    <div class="modal fade" id="editPointModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal Point-->
+    <div class="modal fade" id="EditPointModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Point</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="{{ route('points.store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('points.update', $id) }}" enctype="multipart/form-data">
                     <div class="modal-body">
                         @csrf
-
+                        @method('PATCH')
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control" id="name" name="name"
@@ -71,7 +71,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <script>
-        var map = L.map('map').setView([-5.29, 122.861], 13);
+        var map = L.map('map').setView([-7.829423962391868, 110.38621863652834], 13);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -110,14 +110,13 @@
 
                 drawnItems.addLayer(layer);
 
-                // menampilkan data ke dalam form
+
                 $('#name').val(properties.name);
                 $('#description').val(properties.description);
                 $('#geom_point').val(objectGeometry);
-                $('#preview-image-point').attr('src', "{{ asset('storage/images') }}/"+ properties.image);
+                $('#preview-image-point').attr('src', "{{ asset('storage/images') }}/" + properties.image);
+                $('#EditPointModal').modal('show');
 
-                // menampilkan modal edit
-                $('#editPointModal').modal('show');
             });
         });
     </script>
@@ -127,26 +126,19 @@
         var point = L.geoJson(null, {
             onEachFeature: function(feature, layer) {
 
-                // memasukkan layer point ke dalam drawnItems
                 drawnItems.addLayer(layer);
 
-                var properties = feature.properties;
                 var objectGeometry = Terraformer.geojsonToWKT(feature.geometry);
 
                 layer.on({
                     click: function(e) {
-                        // menampilkan data ke dalam form
                         $('#name').val(feature.properties.name);
                         $('#description').val(feature.properties.description);
                         $('#geom_point').val(objectGeometry);
-                        $('#preview-image-point').attr('src', "{{ asset('storage/images') }}/"+ feature.properties.image);
-
-                        // menampilkan modal edit
-                        $('#editPointModal').modal('show');
+                        $('#preview-image-point').attr('src', "{{ asset('storage/images') }}/" + feature.properties.image);
+                        $('#EditPointModal').modal('show');
                     },
-
                 });
-
             },
         });
         $.getJSON("{{ route('api.point', $id) }}", function(data) {
@@ -156,6 +148,5 @@
                 padding: [100, 100]
             });
         });
-
     </script>
 @endsection
