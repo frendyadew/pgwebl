@@ -9,38 +9,40 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    {{-- Tentukan link aktif berdasarkan halaman saat ini jika perlu --}}
-                    {{-- Contoh sederhana: jika route saat ini adalah 'home' (jika ada), tambahkan 'active' --}}
-                    <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" aria-current="page" href="{{ url('/') }}">Home</a>
+                    <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" aria-current="page" href="{{ url('/') }}"><i class="fa-solid fa-house"></i> Home</a>
                 </li>
                 <li class="nav-item">
-                     {{-- Contoh sederhana: jika route saat ini adalah 'map', tambahkan 'active' --}}
-                    <a class="nav-link" href="{{ route('map') }}">Map</a>
+                    <a class="nav-link" href="{{ route('map') }}"><i class="fa-solid fa-map-location-dot"></i> Map</a>
                 </li>
                 <li class="nav-item">
-                    {{-- Contoh sederhana: jika route saat ini adalah 'table', tambahkan 'active' --}}
-                    <a class="nav-link {{ Route::currentRouteName() == 'table' ? 'active' : '' }}" href="{{ route('table') }}">Table</a>
+                    <a class="nav-link {{ Route::currentRouteName() == 'table' ? 'active' : '' }}" href="{{ route('table') }}"><i class="fa-solid fa-table-list"></i> Table</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {{ in_array(Route::currentRouteName(), ['api.points', 'api.polylines', 'api.polygons']) ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                       Data
+                       <i class="fa-solid fa-database"></i> Data
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu dropdown-menu-end">
                        <li>
-                          <a class="dropdown-item {{ Route::currentRouteName() == 'api.points' ? 'active' : '' }}" href="{{ route('api.points') }}">Points</a>
+                          <a class="dropdown-item {{ Route::currentRouteName() == 'api.points' ? 'active' : '' }}" href="{{ route('api.points') }}"><i class="fa-solid fa-map-pin"></i> Points</a>
                        </li>
                        <li>
-                          <a class="dropdown-item {{ Route::currentRouteName() == 'api.polylines' ? 'active' : '' }}" href="{{ route('api.polylines') }}">Polylines</a>
+                          <a class="dropdown-item {{ Route::currentRouteName() == 'api.polylines' ? 'active' : '' }}" href="{{ route('api.polylines') }}"><i class="fa-solid fa-route"></i> Polylines</a>
                        </li>
                        <li>
-                          <a class="dropdown-item {{ Route::currentRouteName() == 'api.polygons' ? 'active' : '' }}" href="{{ route('api.polygons') }}">Polygons</a>
+                          <a class="dropdown-item {{ Route::currentRouteName() == 'api.polygons' ? 'active' : '' }}" href="{{ route('api.polygons') }}"><i class="fa-solid fa-shapes"></i> Polygons</a>
                        </li>
                     </ul>
                 </li>
-                {{-- HAPUS Dropdown --}}
-                {{-- HAPUS Link Disabled --}}
             </ul>
-            {{-- HAPUS Form Search --}}
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="nav-link btn btn-link text-danger"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                    </form>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
+
