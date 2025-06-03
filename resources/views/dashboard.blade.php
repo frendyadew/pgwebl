@@ -12,6 +12,12 @@
                     {{ __("You're logged in!") }}
                 </div>
             </div>
+            <div class="mt-4 flex items-center justify-center">
+                <a href="{{ route('map') }}" class="inline-flex items-center px-6 py-3 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-green-500 dark:bg-green-700 border border-transparent rounded-md hover:bg-green-600 dark:hover:bg-green-800 focus:outline-none focus:bg-green-600 dark:focus:bg-green-800 active:bg-green-700 dark:active:bg-green-900" style="background-image: linear-gradient(to right, #34C759, #008000);">
+                    Pergi ke Map
+                </a>
+            </div>
         </div>
     </div>
 </x-app-layout>
+

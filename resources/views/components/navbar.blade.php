@@ -14,6 +14,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('map') }}"><i class="fa-solid fa-map-location-dot"></i> Map</a>
                 </li>
+                @auth
                 <li class="nav-item">
                     <a class="nav-link {{ Route::currentRouteName() == 'table' ? 'active' : '' }}" href="{{ route('table') }}"><i class="fa-solid fa-table-list"></i> Table</a>
                 </li>
@@ -33,14 +34,25 @@
                        </li>
                     </ul>
                 </li>
+                @endauth
             </ul>
             <ul class="navbar-nav ms-auto">
+                @auth
                 <li class="nav-item">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="nav-link btn btn-link text-danger"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
                     </form>
                 </li>
+                @endauth
+                @guest
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}"><i class="fa-solid fa-user-plus"></i> Register</a>
+                </li>
+                @endguest
             </ul>
         </div>
     </div>
