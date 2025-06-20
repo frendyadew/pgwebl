@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container mt">
-        <h3>Points</h3>
-        <table class="table table-striped">
+        <h3>Data Points</h3>
+        <table class="table table-striped" id="pointsTable">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -33,8 +33,8 @@
             </tbody>
         </table>
 
-        <h3>Polylines</h3>
-        <table class="table table-striped">
+        <h3 class="mt-5">Data Polylines</h3>
+        <table class="table table-striped" id="polylinesTable">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -64,8 +64,8 @@
             </tbody>
         </table>
 
-        <h3>Polygons</h3>
-        <table class="table table-striped">
+        <h3 class="mt-5">Data Polygons</h3>
+        <table class="table table-striped" id="polygonsTable">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -95,4 +95,18 @@
             </tbody>
         </table>
     </div>
+@endsection
+
+@section('styles')
+    <link rel="stylesheet" href="//cdn.datatables.net/2.3.1/css/dataTables.dataTables.min.css">
+@endsection
+
+@section('scripts')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="//cdn.datatables.net/2.3.1/js/dataTables.min.js"></script>
+    <script>
+        let pointsTable = new DataTable('#pointsTable');
+        let polylinesTable = new DataTable('#polylinesTable');
+        let polygonsTable = new DataTable('#polygonsTable');
+    </script>
 @endsection

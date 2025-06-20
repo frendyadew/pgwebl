@@ -21,8 +21,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('points', PointsController::class);
-Route::resource('polygons', PolylinesController::class);
-Route::resource('polylines', PolygonsController::class);
+Route::resource('polylines', PolylinesController::class);
+Route::resource('polygons', PolygonsController::class);
 
 Route::get('/map', [PointsController::class, 'index'])->name('map');
 Route::get('/table', [TableController::class, 'index'])->name('table');

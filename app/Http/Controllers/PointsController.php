@@ -38,28 +38,25 @@ class PointsController extends Controller
     {
 
         // validate data
-        $request->validate(
-            [
-                'name' => 'required|unique:points,name',
-                'description' => 'required',
-                'geom_point' => 'required',
-                'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:5120'
-            ],
-            [
-                'name.required' => 'Name is required',
-                'name.unique' => 'Name already exists',
-                'description.required' => 'Description is required',
-                'geom_point.required' => 'Geometry is required',
-            ]
-        );
+        $request->validate([
+            'name' => 'required|unique:points,name',
+            'description' => 'required',
+            'geom_point' => 'required',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:5120'
+        ],
+        [
+            'name.required' => 'Name is required',
+            'name.unique' => 'Name already exists',
+            'description.required' => 'Description is required',
+            'geom_point.required' => 'Geometry is required',
+        ]);
 
-        // make folder
-        if (!is_dir('storage/images')) {
-            mkdir('./storage/images', 0777);
-        }
+    // path direktori tujuan
+    $path = storage_path('app/public/images');
 
-
-
+    if (!is_dir($path)) {
+        mkdir($path, 0777, true);
+    }
         // upload image
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -74,7 +71,7 @@ class PointsController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'image' => $name_image,
-            'user_id' => auth()->user()->id,
+            'user_id' => auth()->user()->id
         ];
 
         // create data
@@ -103,7 +100,8 @@ class PointsController extends Controller
             'id' => $id,
         ];
 
-        return view('edit_point', $data);
+        return view('edit-point', $data);
+
     }
 
     /**
